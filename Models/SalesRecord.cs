@@ -9,6 +9,7 @@ namespace SellersWebMVC.Models
     {
         /*
          * terminar de fazer a importação do codigo ( video parado em 5:19
+         * 
          */
 
     }
