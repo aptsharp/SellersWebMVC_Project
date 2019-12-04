@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using SellersWebMVC.Models;
 using SellersWebMVC.Data;
+using SellersWebMVC.Services;
 
 namespace SellersWebMVC
 {
@@ -41,6 +42,8 @@ namespace SellersWebMVC
                     options.UseMySql(Configuration.GetConnectionString("SellersWebMVCContext"), builder => builder.MigrationsAssembly("SellersWebMVC")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>(); // para ser injetado em outras classes
+
 
         }
 
