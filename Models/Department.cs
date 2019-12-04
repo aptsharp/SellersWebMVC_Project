@@ -9,6 +9,30 @@ namespace SellersWebMVC.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public ICollection<Seller> Sellers { get; set; } = new List<Seller>(); //associação de varios
+
+        public Department()
+        {
+        }
+
+        public Department(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public void AddSeller(Seller seller)
+        {
+            Sellers.Add(seller);
+        }
+
+        public double TotalSales(DateTime initial, DateTime final)
+        {
+            return Sellers.Sum(Seller => Seller.TotalSales(initial, final));
+            /*
+             * pegando o total de totalsales que ja tem os resultados
+             */
+        }
 
 
     }
