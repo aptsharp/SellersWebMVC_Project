@@ -2,57 +2,68 @@
 @model IEnumerable<SellersWebMVC.Models.Seller>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vendedores";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <p>Sellers // vendedores // teste</p>
 
+
+
+
 <table class="table table-striped table-hover">
     <thead>
-        <tr class="success">
+        <tr class="warning">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-
             <th>
-                @Html.DisplayNameFor(model => model.birthDate)
+                @Html.DisplayNameFor(model => model.BirthDate)
             </th>
-
             <th>
                 @Html.DisplayNameFor(model => model.BaseSalary)
             </th>
-
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayNameFor(modelItem => item.Name)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
 
 
-            <td>
-                @Html.DisplayNameFor(modelItem => item.Email)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
 
 
-            <td>
-                @Html.DisplayNameFor(modelItem => item.birthDate)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
 
 
-            <td>
-                @Html.DisplayNameFor(modelItem => item.BaseSalary)
-            </td>
-        </tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BaseSalary)
+                </td>
+            </tr>
+
+            <!--
+                   Qual a diferença entre o DisplayFor e o DisplayNameFor?
+
+                    @Html.DisplayNameFor(model => model.Title) -> mostra Title
+                    @Html.DisplayFor(model => model.Title) -> mostra o conteúdo de Title
+
+                     Na verdade o DisplayNameFor mostra o nome da propriedade que pode ser o nome que ela foi declarada ou pode usar um nome diferente anotado com um atributo. Pode ser útil quando você quer mostrar uma descrição do que é o conteúdo. Como a gente não fala inglês e não usamos mnemônicos quase sempre o nome da propriedade não é adequado. Mas se tiver uma anotação do nome então ele pode funcionar como um label para o conteúdo. Tem quem prefira ter um label separado ou definido na view já que pode ter um contexto. Tem quem prefira ter essa vinculação da propriedade com seu nome através de Display().
+
+                 -->
+
         }
     </tbody>
 

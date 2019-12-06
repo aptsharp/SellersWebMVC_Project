@@ -12,7 +12,7 @@ namespace SellersWebMVC.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public DateTime birthDate { get; set; }
+        public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //associação
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();  //associação de varios
@@ -21,12 +21,12 @@ namespace SellersWebMVC.Models
         {
         }
 
-        public Seller(int id, string name, string email, DateTime birthDate, double baseSalary, Department department)
+        public Seller(int id, string name, string email, DateTime BirthDate, double baseSalary, Department department)
         {
             Id = id;
             Name = name;
             Email = email;
-            this.birthDate = birthDate;
+            this.BirthDate = BirthDate;
             BaseSalary = baseSalary;
             Department = department;
         }
