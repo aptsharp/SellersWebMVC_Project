@@ -57,8 +57,8 @@
             <!--
                    Qual a diferença entre o DisplayFor e o DisplayNameFor?
 
-                    @Html.DisplayNameFor(model => model.Title) -> mostra Title
-                    @Html.DisplayFor(model => model.Title) -> mostra o conteúdo de Title
+                    Html.DisplayNameFor(model => model.Title) -> mostra Title
+                    Html.DisplayFor(model => model.Title) -> mostra o conteúdo de Title
 
                      Na verdade o DisplayNameFor mostra o nome da propriedade que pode ser o nome que ela foi declarada ou pode usar um nome diferente anotado com um atributo. Pode ser útil quando você quer mostrar uma descrição do que é o conteúdo. Como a gente não fala inglês e não usamos mnemônicos quase sempre o nome da propriedade não é adequado. Mas se tiver uma anotação do nome então ele pode funcionar como um label para o conteúdo. Tem quem prefira ter um label separado ou definido na view já que pode ter um contexto. Tem quem prefira ter essa vinculação da propriedade com seu nome através de Display().
 
