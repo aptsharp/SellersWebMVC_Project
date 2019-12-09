@@ -23,6 +23,13 @@ namespace SellersWebMVC.Controllers
             return View(list);
         }
 
+        //IActionResult => tipo de retorno de todas as ações.
+        public IActionResult Create()
+        {
+            return View();
+        }
+        
+
 
 
     }
