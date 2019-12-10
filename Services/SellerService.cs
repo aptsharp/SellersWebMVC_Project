@@ -30,7 +30,5 @@ namespace SellersWebMVC.Services
             _context.SaveChanges(); // para confirmar a gravação no banco de dados.
         }
 
-
-
     }
 }

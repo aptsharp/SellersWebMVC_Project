@@ -2,32 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using SellersWebMVC.Models;
 using SellersWebMVC.Services;
+using SellersWebMVC.Models.ViewModels;
 
 namespace SellersWebMVC.Controllers
 {
     public class SellersController : Controller
     {
 
-        private readonly SellerService _sellerservice;
+        private readonly SellerService _sellerService;
+        private readonly DepartmentService _departmentService;
 
-        public SellersController(SellerService sellerservice)
+        public SellersController(SellerService sellerService, DepartmentService departmentService)
         {
-            _sellerservice = sellerservice;
+            _sellerService = sellerService;
+            _departmentService = departmentService;
+           
         }
 
         public IActionResult Index()
         {
-            var list = _sellerservice.FindAll();
+            var list = _sellerService.FindAll();
             return View(list);
         }
 
         //IActionResult => tipo de retorno de todas as ações.
         public IActionResult Create()
         {
-            return View();
+            var departments = _departmentService.FindAll();
+            var viewModel = new SellerFormViewModel { Departments = departments };
+            return View(viewModel);
+            // ERRO DE REFERENCIA DE OBJTO.
         }
 
 
@@ -35,7 +43,7 @@ namespace SellersWebMVC.Controllers
         [ValidateAntiForgeryToken] // para evitar sequestro de sessão // evita ataques CSRF. referencias: https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1 
         public IActionResult Create(Seller seller)
         {
-            _sellerservice.Insert(seller);
+            _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index)); 
             /*
              * nameof -> agilidade na manutenção do site caso mude o nome da pagina Index()[linha 21] será mudado automaticamente tambem [linha 38]
