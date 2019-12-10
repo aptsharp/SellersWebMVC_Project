@@ -21,5 +21,14 @@ namespace SellersWebMVC.Services
             //deixar a operação como sincona / primeiro termina a aplicação ai depois gera os dados
             // depois fazer uma operação assincrona.
         }
+
+        public void Insert (Seller obj)
+        {
+            _context.Add(obj); // para inserir obj no banco de dados
+            _context.SaveChanges(); // para confirmar a gravação no banco de dados.
+        }
+
+
+
     }
 }
