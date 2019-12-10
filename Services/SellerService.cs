@@ -24,6 +24,8 @@ namespace SellersWebMVC.Services
 
         public void Insert (Seller obj)
         {
+            var department = _context.Department.FirstOrDefault(); // cria o objeto departamento e joga dentro do objeto departamento
+            obj.DepartmentId = department.Id; //passa o obj departamento para o id do departamento
             _context.Add(obj); // para inserir obj no banco de dados
             _context.SaveChanges(); // para confirmar a gravação no banco de dados.
         }

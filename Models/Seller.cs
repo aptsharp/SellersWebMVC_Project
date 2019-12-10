@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 
 namespace SellersWebMVC.Models
@@ -15,6 +14,7 @@ namespace SellersWebMVC.Models
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //associação
+        public int DepartmentId { get; set; } // com o "Id" o framework vai identificar que o é para ter um id que seja gerado automaticamente.
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();  //associação de varios
 
         public Seller()
