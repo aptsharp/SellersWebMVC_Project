@@ -27,6 +27,10 @@ namespace SellersWebMVC.Services
             //obj.Department = _context.Department.First(); não é mais preciso devida ao tratamento que ira colocar a ID do departamento
             _context.Add(obj); // para inserir obj no banco de dados
             _context.SaveChanges(); // para confirmar a gravação no banco de dados.
+
+
+            //*************************************************************
+            
         }
 
     }
