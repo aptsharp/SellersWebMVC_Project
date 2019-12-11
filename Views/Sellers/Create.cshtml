@@ -1,4 +1,4 @@
-﻿@model SellersWebMVC.Models.Seller
+﻿@model SellersWebMVC.Models.ViewModels.SellerFormViewModel
 @{
     ViewData["Title"] = "Create";
 }
@@ -12,24 +12,37 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Seller.Name" class="control-label"></label>
+                <input asp-for="Seller.Name" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Seller.Email" class="control-label"></label>
+                <input asp-for="Seller.Email" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
+                <label asp-for="Seller.BirthDate" class="control-label"></label>
+                <input asp-for="Seller.BirthDate" class="form-control" />
             </div>
 
             <div class="form-group">
-                <label asp-for="BaseSalary" class="control-label"></label>
-                <input asp-for="BaseSalary" class="form-control" />
+                <label asp-for="Seller.BaseSalary" class="control-label"></label>
+                <input asp-for="Seller.BaseSalary" class="form-control" />
             </div>
+
+            <div class="form-group">
+                <label asp-for="Seller.Department" class="control-label"></label>
+                <select asp-for="Seller.Department" asp-items="@(new SelectList(Model.Departments,"Id","Name"))" class="form-control"></select>
+            </div>
+
+            <!--
+    esta parte do codigo que vai monta a caixa de seleção
+
+    asp-items -> constroi uma caixa de seleção com um lista que for passada (passa com 3 arguentos)
+    e quais as fontes de dados da lista de coleções ("SelectList") model.Departments -> com a pergunta "QUAL O ATRIBUTO QUE SERÁ A CHAVE? " primeira mente o Id, mas qual aparecerá na caixa de exibição, Name = (( asp-items="(new SelectList(Model.Departments,"Id","Name"))" class="form-control" ))
+
+    -->
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -10,7 +10,7 @@ namespace SellersWebMVC.Services
     {
         private readonly SellersWebMVCContext _context;
         //readonly = somente leitura
-        public SellerService (SellersWebMVCContext context)
+        public SellerService(SellersWebMVCContext context)
         {
             _context = context;
         }
@@ -22,10 +22,9 @@ namespace SellersWebMVC.Services
             // depois fazer uma operação assincrona.
         }
 
-        public void Insert (Seller obj)
+        public void Insert(Seller obj)
         {
-            var department = _context.Department.FirstOrDefault(); // cria o objeto departamento e joga dentro do objeto departamento
-            obj.DepartmentId = department.Id; //passa o obj departamento para o id do departamento
+            //obj.Department = _context.Department.First(); não é mais preciso devida ao tratamento que ira colocar a ID do departamento
             _context.Add(obj); // para inserir obj no banco de dados
             _context.SaveChanges(); // para confirmar a gravação no banco de dados.
         }
