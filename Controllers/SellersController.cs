@@ -50,6 +50,31 @@ namespace SellersWebMVC.Controllers
              * nameof -> agilidade na manutenção do site caso mude o nome da pagina Index()[linha 21] será mudado automaticamente tambem [linha 38]
              */
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound(); // mostra uma resposta basica/generica
+            }
+
+            var obj = _sellerService.FindById(id.Value); // acha o obj para processar
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj); // retorna passando o objeto como argumento
+        }
+
+        //fazendo o post de confirmação do banco de dados
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
         
 
 
