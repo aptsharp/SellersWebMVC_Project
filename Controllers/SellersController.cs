@@ -75,6 +75,23 @@ namespace SellersWebMVC.Controllers
             _sellerService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Details (int? id)
+        {
+            if (id == null)
+            {
+                return NotFound(); // mostra uma resposta basica/generica
+            }
+
+            var obj = _sellerService.FindById(id.Value); // acha o obj para processar
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj); // retorna passando o objeto como argumento
+
+        }
         
 
 
