@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SellersWebMVC.Services.Exceptions;
 
 namespace SellersWebMVC.Services
 {
@@ -43,6 +44,27 @@ namespace SellersWebMVC.Services
             _context.Seller.Remove(obj); // atravez do metodo remove ira remover o vendedor
             _context.SaveChanges(); // para gravar no banco de dados.
             
+        }
+
+        public void Update(Seller obj)
+        {
+            if(!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new KeyNotFoundException("Id not fund");
+            }
+
+            try
+            {
+                _context.Update(obj);//atualiza o banco passando as informçaões.
+                _context.SaveChanges(); //grava as informações no banco. 
+
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+
+            //serve para atualizar o banco pelo ID do banco estando no banco de dados.
         }
 
     }
