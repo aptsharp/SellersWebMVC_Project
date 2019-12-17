@@ -13,6 +13,9 @@ using Microsoft.EntityFrameworkCore;
 using SellersWebMVC.Models;
 using SellersWebMVC.Data;
 using SellersWebMVC.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+
 
 namespace SellersWebMVC
 {
@@ -51,6 +54,18 @@ namespace SellersWebMVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
+
+            //para a definiçãoi de localição generica // por ser generica vai ser dos EUA.
+            var enUS = new CultureInfo("en-US");
+            var localizationOptions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(enUS),
+                SupportedCultures = new List<CultureInfo> { enUS },
+                SupportedUICultures = new List<CultureInfo> { enUS }
+            };
+
+            app.UseRequestLocalization(localizationOptions);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
