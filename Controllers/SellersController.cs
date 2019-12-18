@@ -45,6 +45,13 @@ namespace SellersWebMVC.Controllers
         [ValidateAntiForgeryToken] // para evitar sequestro de sessão // evita ataques CSRF. referencias: https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1 
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
+                return View(viewModel);
+                //Faz a verificação mesmo estando com o JavaScript da maquina do usuario desligada.
+            }
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
             /*
@@ -96,6 +103,7 @@ namespace SellersWebMVC.Controllers
 
         public IActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID is null ********" });
