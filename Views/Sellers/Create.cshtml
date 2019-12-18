@@ -11,6 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Seller.Name" class="control-label"></label>
                 <input asp-for="Seller.Name" class="form-control" />
@@ -36,19 +37,24 @@
                 <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments,"Id","Name"))" class="form-control"></select>
             </div>
 
+
             <!--
-    esta parte do codigo que vai monta a caixa de seleção
+            esta parte do codigo que vai monta a caixa de seleção
 
-    asp-items -> constroi uma caixa de seleção com um lista que for passada (passa com 3 arguentos)
-    e quais as fontes de dados da lista de coleções ("SelectList") model.Departments -> com a pergunta "QUAL O ATRIBUTO QUE SERÁ A CHAVE? " primeira mente o Id, mas qual aparecerá na caixa de exibição, Name = (( asp-items="(new SelectList(Model.Departments,"Id","Name"))" class="form-control" ))
+            asp-items -> constroi uma caixa de seleção com um lista que for passada (passa com 3 arguentos)
+            e quais as fontes de dados da lista de coleções ("SelectList") model.Departments -> com a pergunta "QUAL O ATRIBUTO QUE SERÁ A CHAVE? " primeira mente o Id, mas qual aparecerá na caixa de exibição, Name = (( asp-items="(new SelectList(Model.Departments,"Id","Name"))" class="form-control" ))
 
-            -->
+                    -->
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-success" />
             </div>
 
         </form>
-        
+
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

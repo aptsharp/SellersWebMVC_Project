@@ -36,7 +36,7 @@ namespace SellersWebMVC.Controllers
             var departments = _departmentService.FindAll();
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
-            // ERRO DE REFERENCIA DE OBJTO.
+            // ERRO DE REFERENCIA DE OBJETO.
             // erro ocorrido por ter uma classe dentro da outra em SellerService.
         }
 

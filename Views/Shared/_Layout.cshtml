@@ -34,18 +34,19 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                     <!--NAVBAR - modificando a barra de tarefas superior do navegador-->
-                    <li><a asp-area="" asp-controller="Departments" asp-action="Index">Departamentos</a></li>
                     <li><a asp-area="" asp-controller="Sellers" asp-action="Index">Vendedores</a></li>
+                    <li><a asp-area="" asp-controller="Departments" asp-action="Index">Departamentos</a></li>
 
 
-   <!--
 
-    asp-area -> Áreas são um recurso do ASP.NET usado para organizar funcionalidades relacionadas em um grupo como um namespace separado (para roteamento) e uma estrutura de pastas (para exibições). O uso de áreas cria uma hierarquia para fins de roteamento, adicionando outro parâmetro de rota, area, a controller e action ou a uma Razor Page, page.
+                    <!--
 
-    As áreas proporcionam uma maneira de particionar um aplicativo Web do ASP.NET Core em grupos funcionais menores, cada um com seu próprio conjunto de Razor Pages, controladores, exibições e modelos. Uma área é efetivamente uma estrutura MVC dentro de um aplicativo. Em um projeto Web do ASP.NET Core, os componentes lógicos como páginas, modelo, controlador e modo de exibição são mantidos em pastas diferentes. O tempo de execução do ASP.NET Core usa as convenções de nomenclatura para criar a relação entre esses componentes. Para um aplicativo grande, pode ser vantajoso particionar o aplicativo em áreas de nível alto separadas de funcionalidade. Por exemplo, um aplicativo de comércio eletrônico com várias unidades de negócios, como check-out, cobrança e pesquisa. Cada uma dessas unidades tem sua própria área para conter exibições, controladores, Razor Pages e modelos.
+     asp-area -> Áreas são um recurso do ASP.NET usado para organizar funcionalidades relacionadas em um grupo como um namespace separado (para roteamento) e uma estrutura de pastas (para exibições). O uso de áreas cria uma hierarquia para fins de roteamento, adicionando outro parâmetro de rota, area, a controller e action ou a uma Razor Page, page.
 
-    fonte:https://docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/areas?view=aspnetcore-3.1 ***atualizado para o core 3.1
-   -->
+     As áreas proporcionam uma maneira de particionar um aplicativo Web do ASP.NET Core em grupos funcionais menores, cada um com seu próprio conjunto de Razor Pages, controladores, exibições e modelos. Uma área é efetivamente uma estrutura MVC dentro de um aplicativo. Em um projeto Web do ASP.NET Core, os componentes lógicos como páginas, modelo, controlador e modo de exibição são mantidos em pastas diferentes. O tempo de execução do ASP.NET Core usa as convenções de nomenclatura para criar a relação entre esses componentes. Para um aplicativo grande, pode ser vantajoso particionar o aplicativo em áreas de nível alto separadas de funcionalidade. Por exemplo, um aplicativo de comércio eletrônico com várias unidades de negócios, como check-out, cobrança e pesquisa. Cada uma dessas unidades tem sua própria área para conter exibições, controladores, Razor Pages e modelos.
+
+     fonte: docs.microsoft.com/pt-br/aspnet/core/mvc/controllers/areas?view=aspnetcore-3.1 ***atualizado para o core 3.1
+    -->
 
                 </ul>
             </div>

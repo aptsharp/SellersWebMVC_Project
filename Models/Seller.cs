@@ -10,18 +10,23 @@ namespace SellersWebMVC.Models
     public class Seller
     {
         public int Id { get; set; }
-        
-        [Display(Name="Nome")]
+
+        [Required(ErrorMessage ="{0} required")]
+        [StringLength(60, MinimumLength = 2, ErrorMessage ="Coloque o {0} completo")]
         public string Name { get; set; }
-        
+
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage ="Coloque um e-mail valido")]
         public string Email { get; set; }
-        
-        [Display(Name = "Data de aniversario")] //
+
+        [Required(ErrorMessage = "{0} required")]
+        [Display(Name = "Data de aniversario")] 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:DD/MM/YYYY}")]
+        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}")]
         public DateTime BirthDate { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name="Salario Base")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public double BaseSalary { get; set; }
