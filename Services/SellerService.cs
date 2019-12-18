@@ -17,38 +17,40 @@ namespace SellersWebMVC.Services
             _context = context;
         }
 
-        public List<Seller> FindAll()
+        public async Task<List<Seller>> FindAllAsync()
         {
-            return _context.Seller.ToList();
+            return await _context.Seller.ToListAsync();
             //deixar a operação como sincona / primeiro termina a aplicação ai depois gera os dados
             // depois fazer uma operação assincrona.
         }
 
-        public void Insert(Seller obj)
+        public async Task InsertAsync(Seller obj)
         {
             //obj.Department = _context.Department.First(); não é mais preciso devida ao tratamento que ira colocar a ID do departamento
             _context.Add(obj); // para inserir obj no banco de dados
-            _context.SaveChanges(); // para confirmar a gravação no banco de dados.
+            await _context.SaveChangesAsync(); // para confirmar a gravação no banco de dados.
             
         }
 
-        public Seller FindById(int id)
+        public async Task<Seller> FindByIdAsync(int id)
         {
-            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Seller.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
             //para achar os vendedores
         }
 
-        public void Remove (int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Seller.Find(id); // para achar o ID do vendedor que será a referencia para o processamento
+            var obj = await _context.Seller.FindAsync(id); // para achar o ID do vendedor que será a referencia para o processamento
             _context.Seller.Remove(obj); // atravez do metodo remove ira remover o vendedor
-            _context.SaveChanges(); // para gravar no banco de dados.
+            await _context.SaveChangesAsync(); // para gravar no banco de dados.
             
         }
 
-        public void Update(Seller obj)
+        public async Task UpdateAsync(Seller obj)
         {
-            if(!_context.Seller.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == obj.Id);
+
+            if ( !hasAny)
             {
                 throw new KeyNotFoundException("Id not fund");
             }
@@ -56,7 +58,7 @@ namespace SellersWebMVC.Services
             try
             {
                 _context.Update(obj);//atualiza o banco passando as informçaões.
-                _context.SaveChanges(); //grava as informações no banco. 
+                await _context.SaveChangesAsync(); //grava as informações no banco. 
 
             }
             catch(DbUpdateConcurrencyException e)

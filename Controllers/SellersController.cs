@@ -24,16 +24,16 @@ namespace SellersWebMVC.Controllers
 
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _sellerService.FindAll();
+            var list = await _sellerService.FindAllAsync();
             return View(list);
         }
 
         //IActionResult => tipo de retorno de todas as ações.
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var departments = _departmentService.FindAll();
+            var departments = await _departmentService.FindAllAsync();
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
             // ERRO DE REFERENCIA DE OBJETO.
@@ -43,30 +43,30 @@ namespace SellersWebMVC.Controllers
 
         [HttpPost] // anotação que é somente para dizer que é um POST e não um GET (principalmente para evitar vulnerabilidades no site "pentest")
         [ValidateAntiForgeryToken] // para evitar sequestro de sessão // evita ataques CSRF. referencias: https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery?view=aspnetcore-3.1 
-        public IActionResult Create(Seller seller)
+        public async Task<IActionResult> Create(Seller seller)
         {
             if (!ModelState.IsValid)
             {
-                var departments = _departmentService.FindAll();
+                var departments = await _departmentService.FindAllAsync();
                 var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
                 return View(viewModel);
                 //Faz a verificação mesmo estando com o JavaScript da maquina do usuario desligada.
             }
-            _sellerService.Insert(seller);
+           await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
             /*
              * nameof -> agilidade na manutenção do site caso mude o nome da pagina Index()[linha 21] será mudado automaticamente tambem [linha 38]
              */
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID is null" }); // mostra uma resposta basica/generica
             }
 
-            var obj = _sellerService.FindById(id.Value); // acha o obj para processar
+            var obj = await _sellerService.FindByIdAsync(id.Value); // acha o obj para processar
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID not fund" });
@@ -78,20 +78,20 @@ namespace SellersWebMVC.Controllers
         //fazendo o post de confirmação do banco de dados
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _sellerService.Remove(id);
+            await _sellerService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID is null ************** " });  // mostra uma resposta basica/generica
             }
 
-            var obj = _sellerService.FindById(id.Value); // acha o obj para processar
+            var obj = await _sellerService.FindByIdAsync(id.Value); // acha o obj para processar
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID is null *************" });
@@ -101,7 +101,7 @@ namespace SellersWebMVC.Controllers
 
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             
             if (id == null)
@@ -109,13 +109,13 @@ namespace SellersWebMVC.Controllers
                 return RedirectToAction(nameof(Error), new { message = "ID is null ********" });
             }
 
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "ID is null **********" });
             }
 
-            List<Department> departments = _departmentService.FindAll();
+            List<Department> departments = await _departmentService.FindAllAsync();
             SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
             return View(viewModel);
 
@@ -123,7 +123,7 @@ namespace SellersWebMVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int id, Seller seller)
         {
             if (id != seller.Id)
             {
@@ -131,7 +131,7 @@ namespace SellersWebMVC.Controllers
             }
             try
             {
-                _sellerService.Update(seller);
+                await _sellerService.UpdateAsync(seller);
                 return RedirectToAction(nameof(Index));
             }
             catch (DllNotFoundException)
