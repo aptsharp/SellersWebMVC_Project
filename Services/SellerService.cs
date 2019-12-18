@@ -40,9 +40,16 @@ namespace SellersWebMVC.Services
 
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Seller.FindAsync(id); // para achar o ID do vendedor que será a referencia para o processamento
-            _context.Seller.Remove(obj); // atravez do metodo remove ira remover o vendedor
-            await _context.SaveChangesAsync(); // para gravar no banco de dados.
+            try
+            {
+                var obj = await _context.Seller.FindAsync(id); // para achar o ID do vendedor que será a referencia para o processamento
+                _context.Seller.Remove(obj); // atravez do metodo remove ira remover o vendedor
+                await _context.SaveChangesAsync(); // para gravar no banco de dados.
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Vendedor não pode ser deletado!");
+            }
             
         }
 

@@ -8,6 +8,7 @@ using SellersWebMVC.Models;
 using SellersWebMVC.Services;
 using SellersWebMVC.Models.ViewModels;
 using System.Diagnostics;
+using SellersWebMVC.Services.Exceptions;
 
 namespace SellersWebMVC.Controllers
 {
@@ -80,8 +81,15 @@ namespace SellersWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message});
+            }
         }
 
         public async Task<IActionResult> Details(int? id)
