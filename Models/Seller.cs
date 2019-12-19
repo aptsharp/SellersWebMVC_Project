@@ -34,7 +34,7 @@ namespace SellersWebMVC.Models
         [Display(Name="Departamento")]
         public Department Department { get; set; } //associação
         public int DepartmentId { get; set; } // com o "Id" o framework vai identificar que o é para ter um id que seja gerado automaticamente.
-        public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();  //associação de varios
+        public ICollection<SalesRecords> Sales { get; set; } = new List<SalesRecords>();  //associação de varios
 
         public Seller()
         {
@@ -50,12 +50,12 @@ namespace SellersWebMVC.Models
             Department = department;
         }
 
-        public void AddSales(SalesRecord sr)
+        public void AddSales(SalesRecords sr)
         {
             Sales.Add(sr);
         }
 
-        public void RemoveSales(SalesRecord sr)
+        public void RemoveSales(SalesRecords sr)
         {
             Sales.Remove(sr);
         }
