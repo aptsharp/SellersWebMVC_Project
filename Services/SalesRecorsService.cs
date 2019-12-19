@@ -11,7 +11,7 @@ namespace SellersWebMVC.Services
     {
         private readonly SellersWebMVCContext _context;
         //readonly = somente leitura
-        public SalesRecorsService (SellersWebMVCContext context)
+        public SalesRecorsService(SellersWebMVCContext context)
         {
             _context = context;
         }
@@ -38,9 +38,36 @@ namespace SellersWebMVC.Services
                 .ToListAsync();
             //faz a pesquisa por LINQ no banco de dados
             //    operação que busca por data
-                
-
         }
-       
+
+
+
+        public async Task<List<IGrouping<Department, SalesRecords>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
+        {
+
+         //consulta não é especificada pela simples difinição dela, deve ser refinada.
+
+        var result = from obj in _context.SalesRecords select obj;
+        if (minDate.HasValue)
+        {
+            result = result.Where(x => x.Date >= minDate.Value);
+        }
+
+        if (maxDate.HasValue)
+        {
+            result = result.Where(x => x.Date <= maxDate.Value);
+        }
+
+        return await result
+            .Include(x => x.Seller)
+            .Include(x => x.Seller.Department)
+            .OrderByDescending(x => x.Date)
+            .GroupBy(x => x.Seller.Department)
+            .ToListAsync();
+        }        
     }
 }
+
+
+       
+                
