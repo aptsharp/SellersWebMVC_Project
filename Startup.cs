@@ -47,6 +47,7 @@ namespace SellersWebMVC
             services.AddScoped<SeedingService>();
             services.AddScoped<SellerService>(); // para ser injetado em outras classes
             services.AddScoped<DepartmentService>(); // para fazer a injeção no banco de dados
+            services.AddScoped<SalesRecorsService>(); // serviço ja pode ser injetado no mecanismo de injeção de dependencia.
 
 
         }
